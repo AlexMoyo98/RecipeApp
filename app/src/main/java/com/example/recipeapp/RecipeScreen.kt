@@ -22,10 +22,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun RecipeScreen(modifier: Modifier = Modifier,
-                 viewstate:MainViewModel.RecipeState,
-                 navigateToDetail: (Category) -> Unit) {
-
+fun RecipeScreen(
+    modifier: Modifier = Modifier,
+    viewstate: MainViewModel.RecipeState,
+    navigateToDetail: (Category) -> Unit
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         when {
             viewstate.loading -> {
@@ -37,24 +38,27 @@ fun RecipeScreen(modifier: Modifier = Modifier,
             }
 
             else -> {
-                CategoryScreen(categories = viewstate.list,
-                    navigateToDetail)
+                CategoryScreen(
+                    categories = viewstate.list,
+                    navigateToDetail
+                )
             }
         }
     }
 }
 
 @Composable
-fun CategoryScreen(categories: List<Category>,
-                   navigateToDetail: (Category) -> Unit) {
+fun CategoryScreen(
+    categories: List<Category>,
+    navigateToDetail: (Category) -> Unit
+) {
     LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
         items(categories) { category ->
-            CategoryItem(category = category,navigateToDetail)
+            CategoryItem(category = category, navigateToDetail)
         }
     }
 }
 
-// How each Items looks like
 @Composable
 fun CategoryItem(
     category: Category,
@@ -75,7 +79,6 @@ fun CategoryItem(
                 .fillMaxSize()
                 .aspectRatio(1f)
         )
-
         Text(
             text = category.strCategory,
             color = Color.Black,
